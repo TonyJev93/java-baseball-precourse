@@ -25,7 +25,7 @@ public class AnswerTest {
             int expectedMaxValue = 9;
 
             //then
-            for (int ballPosition = BallPosition.MIN_VALUE; ballPosition <= Answer.ANSWER_SIZE; ballPosition++) {
+            for (int ballPosition = BallPosition.MIN_POSITION; ballPosition <= Answer.ANSWER_SIZE; ballPosition++) {
                 Ball ball = answer.getBallByPosition(
                         BallPosition.from(ballPosition)
                 );
