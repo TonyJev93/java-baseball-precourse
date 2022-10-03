@@ -18,6 +18,13 @@ public class OutputUtil {
             return;
         }
 
+        List<String> resultMessages = getResultMessage(strike, ball);
+
+        System.out.println(String.join(" ", resultMessages));
+
+    }
+
+    private static List<String> getResultMessage(int strike, int ball) {
         List<String> resultMessages = new ArrayList<>();
 
         if (ball > 0) {
@@ -27,8 +34,6 @@ public class OutputUtil {
         if (strike > 0) {
             resultMessages.add(strike + "스트라이크");
         }
-
-        System.out.println(String.join(" ", resultMessages));
-
+        return resultMessages;
     }
 }
