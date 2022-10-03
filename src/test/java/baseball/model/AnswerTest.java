@@ -10,7 +10,38 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AnswerTest {
+class AnswerTest {
+
+    @Test
+    @DisplayName("String을 Answer로 정상적으로 변환되는지 확인한다.")
+    void 정답생성_테스트() {
+        // given
+        String firstBallNumberString = "1";
+        String secondBallNumberString = "2";
+        String thirdBallNumberString = "3";
+
+        String totalBallNumberString = firstBallNumberString + secondBallNumberString + thirdBallNumberString;
+
+        // when
+        Answer answer = Answer.fromString(totalBallNumberString);
+        List<Ball> balls = answer.getBalls();
+
+        //then
+        assertThat(balls)
+                .hasSize(Answer.ANSWER_SIZE);
+
+        공_정상_생성여부_테스트(balls.get(0), 1, Integer.parseInt(firstBallNumberString));
+        공_정상_생성여부_테스트(balls.get(1), 2, Integer.parseInt(secondBallNumberString));
+        공_정상_생성여부_테스트(balls.get(2), 3, Integer.parseInt(thirdBallNumberString));
+    }
+
+    private void 공_정상_생성여부_테스트(Ball ball, int ballPosition, int ballNumber) {
+        assertThat(ball.position()).as("공 위치 값이 일치하는지 확인")
+                .isEqualTo((ballPosition));
+
+        assertThat(ball.number()).as("공 숫자 값이 일치하는지 확인")
+                .isEqualTo(ballNumber);
+    }
 
     @Nested
     @DisplayName("정답 생성 유효성을 검증한다.")
@@ -53,7 +84,7 @@ public class AnswerTest {
         void 정답_중복_체크() {
             // given
             Answer answer = Answer.create();
-            List<Integer> ballValueList = answer.getBallValues();
+            List<Integer> ballValueList = answer.getBallNumberValues();
             Set<Integer> ballValueSet = new HashSet<>(ballValueList);
 
             //then
