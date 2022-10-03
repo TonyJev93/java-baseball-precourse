@@ -46,6 +46,17 @@ class BallNumberTest {
             assertThat(ballNumber.value()).as("공 위치 값이 동일하게 대입 되었는지 확인.")
                     .isEqualTo(ballNumberValue);
         }
+
+        @Test
+        @DisplayName("랜덤 공 숫자값이 1~9 사이 정상 생성되는지 확인한다.")
+        void createRandomBallNumberValue() {
+            // when
+            int randomBallNumberValue = BallNumber.createRandomBallNumberValue();
+
+            //then
+            assertThat(randomBallNumberValue).as("1~9 사이 랜덤 값 생성여부 확인")
+                    .isBetween(EXPECTED_MIN_BALL_NUMBER, EXPECTED_MAX_BALL_NUMBER);
+        }
     }
 
     @Nested
